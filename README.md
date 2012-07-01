@@ -3,9 +3,12 @@ Parkmate
 
 --------
 
-The idea of this project is to avoid having to pay silly fines simply because
-we can be forgetful. The sole purpose of this sight is to remind you to move
-your car before you get a ticket.
+The idea of this project is to avoid having to pay silly fines simply
+because we can be forgetful. The sole purpose of this sight is to remind you
+to move your car before you get a ticket. The future home of this project
+will be http://parkmate.us but until the code is deployable it will live
+in this repo.
+
 
 Since there are already a number of ways to keep track of short amounts of
 time, for say parking meters, the target audience of parkmate is the
