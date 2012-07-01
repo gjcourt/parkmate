@@ -4,27 +4,13 @@
         <title>Login</title>
     </head>
     <body>
-        <div id="login-form">
-            <form action="/login" method="post">
-                <ul>
-                    <li>
-                        <label>
-                            Username
-                            <input type="text" name="user" />
-                        </label>
-                    </li>
-                    <li>
-                        <label>
-                            Password
-                            <input type="password" name="password" />
-                        </label>
-                    </li>
-                    <li>
-                        <input type="submit" value="Press me" />
-                    </li>
-                </ul>
-            </form>
-        </div>
+        <form method="post">
+            <input class="span3 input-medium" type="text" name="user" placeholder="Email">
+            <br>
+            <input class="span3 input-medium" type="password" name="password" placeholder="Password">
+            <br>
+            <button class="btn btn-medium" type="submit">Signin</button>
+        </form>
     </body>
 </html>
 
