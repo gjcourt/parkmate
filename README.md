@@ -24,7 +24,7 @@ few super cool libraries to help us get off the ground. These include
 [ring](http://github.com/ring-clojure/ring). All of these
 libraries are useful, intuitive, and relatively light-weight.
 
-The website is built using html/js/css using
+The website is built using
 [Twitter Bootstrap](http://twitter.github.com/bootstrap/index.html) (isn't
 everything these days) which removes almost all of the pain associated with
 front-end development.
