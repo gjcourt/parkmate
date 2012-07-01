@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title id="title"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+    <link href="bootstrap/css/bootstrap.css" rel="stylesheet">
+    <style>
+      body {
+        padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
+      }
+    </style>
+    <style type="text/css">
+      .countdown-desc {
+          margin: 7px 3px;
+      }
+      .countdown-desc div {
+        float: left;
+        font-family: Arial;
+        width: 70px;
+        margin-right: 65px;
+        font-size: 13px;
+        font-weight: bold;
+        color: #000;
+      }
+      .countdown-separator {
+        font-size: 54px;
+        margin: 10px 7px;
+        color: #000;
+      }
+    </style>
+    <link href="bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="bootstrap/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="bootstrap/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="bootstrap/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="bootstrap/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="bootstrap/ico/apple-touch-icon-57-precomposed.png">
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="#">Parkmate</a>
+          <div class="nav-collapse">
+            <ul class="nav">
+              <li class="active"><a href="http://gjcourt.com">Home</a></li>
+              <li><a href="/login">Login</a></li>
+              <li><a href="http://gjcourt.com/about">About</a></li>
+              <li><a href="http://gjcourt.com/contact">Contact</a></li>
+            </ul>
+        </div><!--/.nav-collapse -->
+
+          <!-- User profile group -->
+          <div class="btn-group pull-right">
+              <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                  <i class="icon-user"></i> gjcourt
+                  <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                  <li><a href="#">Profile</a></li>
+                  <li class="divider"></li>
+                  <li><a href="/logout">Sign Out</a></li>
+              </ul>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- TODO make sure that everything inherits from this
+    bootstrapped base template
+    -->
+    <div id="content" class="container">
+        <div class="row">
+            <div class="span2">
+                <a class="btn btn-primary">New reminder</a>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span9 offset3">
+                <h2>Move your car</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span10 offset2">
+                <div id="countdown"></div>
+                <div class="countdown-desc">
+                    <div>Days</div>
+                    <div>Hours</div>
+                    <div>Minutes</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span2 offset10">
+                <a class="btn">
+                    <i class="icon-trash icon-black"></i>
+                    Delete
+                </a>
+            </div>
+        </div>
+    </div> <!-- /container -->
+
+    <!-- Le javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="bootstrap/js/jquery.js"></script>
+    <script src="bootstrap/js/bootstrap.js"></script>
+    <script src="countdown/js/jquery.countdown.js"></script>
+    <script type="text/javascript">
+      $(function(){
+        $('#countdown').countdown({
+          image: 'countdown/img/digits.png',
+          startTime: '03:14:01',
+          format: 'dd:hh:mm'
+        });
+      });
+    </script>
+  </body>
+</html>
