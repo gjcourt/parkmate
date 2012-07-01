@@ -3,19 +3,16 @@ Parkmate
 
 --------
 
-The idea of this project is to avoid having to pay silly fines simply
-because we can be forgetful. The sole purpose of this sight is to remind you
-to move your car before you get a ticket. The future home of this project
-will be http://parkmate.us but until the code is deployable it will live
-in this repo.
-
+The sole purpose of this site is to remind you to move your car before you
+get a ticket. The future home of this project will be http://parkmate.us
+but until the code is deployable it will live in this repo.
 
 Since there are already a number of ways to keep track of short amounts of
-time, for say parking meters, the target audience of parkmate is the
+time, for say parking meters, the target audience of Parkmate is the
 universe of people that are paranoid about getting a street cleaning or
 towing ticket. The expected time to move your car for this class of incident
 can vary anywhere between a few days to a few weeks. If this is a problem
-for you, parkmate will hopefully solve it.
+for you, Parkmate will hopefully solve it.
 
 The Parkmate application is written in clojure. We are currently using a
 few super cool libraries to help us get off the ground. These include
