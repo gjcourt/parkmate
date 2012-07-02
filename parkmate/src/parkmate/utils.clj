@@ -83,6 +83,6 @@
                 data-bytes))))
 
 (defn salt [s]
-  (let [phrase "oh herro here is app i make 4u"]
-    (str phrase s)))
+  (let [phrase "No fear no distractions, the ability to let that which matters, truly slide."]
+    (str "!@#$%~:'/[]\.#~`~``^&*()(!_@#" phrase s)))
 
