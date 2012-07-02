@@ -70,3 +70,19 @@
   (if (= n 1)
     (str astr)
     (str astr "s")))
+
+(defn get-hash [type data]
+  (.digest (java.security.MessageDigest/getInstance type) (.getBytes data) ))
+
+(defn sha1-hash [data]
+  (let [data-bytes (get-hash "sha1" data)]
+    (apply str
+           (map #(.substring
+                   (Integer/toString
+                     (+ (bit-and % 0xff) 0x100) 16) 1)
+                data-bytes))))
+
+(defn salt [s]
+  (let [phrase "oh herro here is app i make 4u"]
+    (str phrase s)))
+
