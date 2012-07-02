@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Create</title>
+        <script>
+            $('#create-hidden').val((new Date()).getUTCDate());
+        </script>
+    </head>
+    <body>
+        <form method="post">
+            <select name="hour">
+                <option value="6">6:00am</option>
+                <option value="7">7:00am</option>
+                <option value="8" selected="selected">8:00am</option>
+                <option value="9">9:00am</option>
+                <option value="10">10:00am</option>
+                <option value="11">11:00am</option>
+                <option value="12">12:00pm</option>
+                <option value="13">1:00pm</option>
+                <option value="14">2:00pm</option>
+                <option value="15">3:00pm</option>
+                <option value="16">4:00pm</option>
+                <option value="17">5:00pm</option>
+                <option value="18">6:00pm</option>
+                <option value="19">7:00pm</option>
+                <option value="20">8:00pm</option>
+                <option value="21">9:00pm</option>
+                <option value="22">10:00pm</option>
+                <option value="23">11:00pm</option>
+                <option value="0">12:00am</option>
+                <option value="1">1:00am</option>
+                <option value="2">2:00am</option>
+                <option value="3">3:00am</option>
+                <option value="4">4:00am</option>
+                <option value="5">5:00am</option>
+            </select>
+            <select name="day">
+                <option value="1">Sunday</option>
+                <option value="2">Monday</option>
+                <option value="3" selected="selected">Tuesday</option>
+                <option value="4">Wednesday</option>
+                <option value="5">Thursday</option>
+                <option value="6">Friday</option>
+                <option value="7">Saturday</option>
+            </select>
+            <br>
+            <input class="span3 input-medium" type="text" name="week"
+                   placeholder="Week (eg: 2,4)">
+            <br>
+            <input id="create-hidden" type="hidden" value="" name="timestamp">
+            <button class="btn btn-medium" type="submit">Create</button>
+        </form>
+    </body>
+</html>

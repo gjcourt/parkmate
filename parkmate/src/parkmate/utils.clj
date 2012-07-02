@@ -66,10 +66,6 @@
   ([expr] `(if-let [x# ~expr] (html/after x#) identity))
   ([expr & exprs] `(maybe-after (or ~expr ~@exprs))))
 
-(defmacro maybe
-  ([trans expr] `(if-let [x# ~expr] (~trans x#) identity))
-  ([trans expr & exprs] `(maybe (or ~expr ~@exprs))))
-
 (defn pluralize [astr n]
   (if (= n 1)
     (str astr)
