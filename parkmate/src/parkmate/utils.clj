@@ -84,5 +84,5 @@
 
 (defn salt [s]
   (let [phrase "No fear no distractions, the ability to let that which matters, truly slide."]
-    (str "!@#$%~:'/[]\.#~`~``^&*()(!_@#" phrase s)))
+    (str phrase s)))
 
