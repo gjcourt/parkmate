@@ -1,9 +1,12 @@
 (ns parkmate.core
+  (:require [parkmate.backend :as db]
+            [korma.core :as k])
   (:use net.cgrand.enlive-html
         parkmate.utils
         ring.util.response
         [net.cgrand.moustache :only [app pass]]
-        [ring.middleware file params session]))
+        [ring.middleware file params session])
+  (:gen-class))
 
 (def form-sel [:form])
 (def create-sel #{[:head :> :script] [:form]})
@@ -41,16 +44,16 @@
 
 (defn authenticate-user
   [{user "user" password "password"}]
-  (println "AUTHENTICATING" user password)
-  (if (or (and (= user "gjcourt") (= password "password"))
-          (and (= user "admin") (= password "secret")))
-    (assoc (redirect "/reminder") :session {:user user})
-    (redirect "/login")))
+  (let [query (k/select db/user
+                (k/where {:email user
+                          :pass (sha1-hash password)}))]
+    (if (seq query)
+      (assoc (redirect "/reminder") :session {:user user})
+      (redirect "/login"))))
 
 (defn authenticated?
   [session]
-  (comment (seq (:user session)))
-  true)
+  (seq (:user session)))
 
 (defn admin-user?
   [session]
@@ -124,7 +127,9 @@
                               create-handler)
     [&] page-not-found))
 
-(defonce *server* (run-server routes))
-
 ; TODO
 ; Start off a background process that polls for reminders and triggers emails when approipriate.
+
+(defn -main
+  []
+  (run-server routes))
