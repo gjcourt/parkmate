@@ -1,6 +1,7 @@
 (ns parkmate.core
   (:require [parkmate.backend :as db]
-            [korma.core :as k])
+            [korma.core :as k]
+            [clj-time.core :as ct])
   (:use net.cgrand.enlive-html
         parkmate.utils
         ring.util.response
@@ -22,10 +23,11 @@
   [])
 
 (deftemplate index "templates/index.html"
-  [{:keys [title style script content]}]
+  [{:keys [username title style script content]}]
   [:#title] (maybe-content title)
   [:head [:style first-of-type]] (maybe-after style)
   [:#content] (maybe-content content)
+  [:.icon-user] (maybe-after (str " " username))
   [:body [:script last-of-type]] (maybe-after script))
 
 (defn snip2dict
@@ -42,13 +44,26 @@
   []
   (snip2dict (create) [[:style] [:script] [:form]]))
 
+(defn user-query!
+  [email pass]
+  (k/select db/user
+    (k/where {:email email
+              :pass (sha1-hash pass)})))
+
+(defn reminder-query!
+  "Select all reminders for a user"
+  [id]
+  (let [dt (ct/now)]
+    (k/select db/reminder
+      (k/where {:user_id id
+                :target < dt})
+      (k/order :target :ASC)))
+
 (defn authenticate-user
-  [{user "user" password "password"}]
-  (let [query (k/select db/user
-                (k/where {:email user
-                          :pass (sha1-hash password)}))]
-    (if (seq query)
-      (assoc (redirect "/reminder") :session {:user user})
+  [{user "user" pass "password"}]
+  (let [query (user-query! user pass)]
+    (if (= (count query) 1)
+      (assoc (redirect "/reminder") :session {:user (first query)})
       (redirect "/login"))))
 
 (defn authenticated?
@@ -60,11 +75,13 @@
   (= "admin" (:user session)))
 
 (defn create-reminder!
-  [{week "week" day "day" hour "hour" :as params}]
-  ; TODO fillin with call to backend
-  (println "PARAMS" week, day, hour)
-  (println "PARAMS" params)
-  (redirect "/reminder/create"))
+  [{p :form-params session :session}]
+  (let [offset (:offset p)
+        trigger (:trigger p)
+        ts (ct/plus (ct/now) (ct/hours offset))
+        trg (ct/plus (ct/now) (ct/hours  trigger))
+        uid (-> session :session :user)]
+    (db/mk-reminder uid, ts, trg)))
 
 ; Middleware
 (defn wrap-user-auth
@@ -82,14 +99,16 @@
 (defn home-handler
   [req]
   (render-to-response
-    (index {:title "Parkmate"})))
+    (index {:username (-> req :session :user :username)
+            :title "Parkmate"})))
 
 (defn login-handler
   [req]
   (if-let [params (not-empty (:form-params req))]
     (authenticate-user params)
     (render-to-response
-      (index {:title "Login"
+      (index {:username (-> req :session :user :username)
+              :title "Login"
               :content (login)}))))
 
 (defn logout-handler
@@ -99,7 +118,8 @@
 (defn reminder-handler
   [req]
   (render-to-response
-    (index (conj {:title "Reminder"}
+    (index (conj {:username (-> req :session :user :username)
+                  :title "Reminder"}
                  (wrapped-reminder-snip)))))
 
 (defn create-handler
@@ -107,7 +127,8 @@
   (if-let [params (not-empty (:form-params req))]
     (create-reminder! params)
     (render-to-response
-      (index (conj {:title "New reminder"}
+      (index (conj {:username (-> req :session :user :username)
+                    :title "New reminder"}
                    (wrapped-create-snip))))))
 
 ;; Routes

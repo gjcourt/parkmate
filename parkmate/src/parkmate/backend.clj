@@ -38,13 +38,14 @@
              :admin admin})))
 
 (defn mk-reminder
-  [id date]
-  (insert reminder
-    (values {:target date
-             :trigger date
-             :flags 0
-             :media 1
-             :user_id id})))
+  ([id date] (mk-reminder id date date))
+  ([id date trigger]
+    (insert reminder
+      (values {:target date
+               :trigger trigger
+               :flags 0
+               :media 1
+               :user_id id}))))
 
 (defn load-users
   []

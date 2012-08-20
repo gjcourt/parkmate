@@ -2,7 +2,6 @@
 /checkouts
 /lib
 /native
-/target
 parkmate.db
 pom.xml
 *.jar

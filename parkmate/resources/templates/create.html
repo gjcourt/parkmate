@@ -47,6 +47,15 @@
             <input class="span3 input-medium" type="text" name="week"
                    placeholder="Week (eg: 2,4)">
             <br>
+            <div>Notify me
+                <input name="trigger-number" type="text"/>
+                <select name="trigger-interval">
+                    <option value="minute">minutes</option>
+                    <option value="hour" selected="selected">hours</option>
+                </select>
+                before.
+            </div>
+            <br>
             <input id="create-hidden" type="hidden" value="" name="timestamp">
             <button class="btn btn-medium" type="submit">Create</button>
         </form>
